@@ -2,12 +2,13 @@ package org.todo.api.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.todo.api.exception.ResourceNotFoundException;
 import org.todo.api.mapper.TodoMapper;
 import org.todo.api.model.Todo;
-import org.todo.api.payload.TodoRequest;
-import org.todo.api.payload.TodoResponse;
+import org.todo.api.payload.TodoDto;
 import org.todo.api.repository.TodoRepository;
 
+import java.lang.module.ResolutionException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,36 +22,35 @@ public class TodoServiceImpl implements TodoService{
     private TodoMapper todoMapper;
 
     @Override
-    public List<TodoResponse> getTodos() {
+    public List<TodoDto> getTodos() {
         List<Todo> todos = todoRepository.findAll();
         return todos.stream()
-                .map(todoMapper::toResponse)
+                .map(todoMapper::toDto)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public TodoResponse getToDoById(Long id) {
+    public TodoDto getToDoById(Long id) {
         return todoRepository.findById(id)
-                .map(todoMapper::toResponse)
-                .orElseThrow(() -> new RuntimeException("Todo not found with id " + id));
+                .map(todoMapper::toDto)
+                .orElseThrow(() -> new ResourceNotFoundException("Todo not found with id " + id));
     }
 
     @Override
-    public TodoResponse createToDo(TodoRequest todoRequest) {
-        Todo todo = todoMapper.toEntity(todoRequest);
+    public TodoDto createToDo(TodoDto todoDto) {
+        Todo todo = todoMapper.toEntity(todoDto);
         Todo savedTodo = todoRepository.save(todo);
-        return todoMapper.toResponse(savedTodo);
+        return todoMapper.toDto(savedTodo);
 
     }
 
     @Override
-    public TodoResponse updateToDo(Long id, TodoRequest todoRequest) {
+    public TodoDto updateToDo(Long id, TodoDto todoDto) {
         Todo todo = todoRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Todo not found with id " + id));
-        todo.setTitle(todoRequest.getTitle());
-        todo.setCompleted(todoRequest.isCompleted());
+                .orElseThrow(() -> new ResourceNotFoundException("Todo not found with id " + id));
+        todo.setCompleted(todoDto.isCompleted());
         Todo updatedTodo = todoRepository.save(todo);
-        return todoMapper.toResponse(updatedTodo);
+        return todoMapper.toDto(updatedTodo);
     }
 
     @Override

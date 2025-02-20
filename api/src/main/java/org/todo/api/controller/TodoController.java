@@ -3,10 +3,10 @@ package org.todo.api.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.todo.api.payload.TodoRequest;
-import org.todo.api.payload.TodoResponse;
+import org.todo.api.payload.TodoDto;
 import org.todo.api.service.TodoService;
 
 import java.util.List;
@@ -21,30 +21,30 @@ public class TodoController {
     private TodoService todoService;
 
     @GetMapping("/todos/")
-    public ResponseEntity<List<TodoResponse>> getAllTodos() {
+    public ResponseEntity<List<TodoDto>> getAllTodos() {
         logger.info("GET request to /api/todos");
-        List<TodoResponse> response = todoService.getTodos();
+        List<TodoDto> response = todoService.getTodos();
         return ResponseEntity.ok(response);
     }
 
     @GetMapping("/todos/{id}")
-    public ResponseEntity<TodoResponse> getTodoById(@PathVariable Long id) {
+    public ResponseEntity<TodoDto> getTodoById(@PathVariable Long id) {
         logger.info("GET request to /api/todos/{}", id);
-        TodoResponse response = todoService.getToDoById(id);
+        TodoDto response = todoService.getToDoById(id);
         return ResponseEntity.ok(response);
     }
 
     @PostMapping("/todos/")
-    public ResponseEntity<TodoResponse> addTodo(@RequestBody TodoRequest request) {
+    public ResponseEntity<TodoDto> addTodo(@RequestBody TodoDto request) {
         logger.info("POST request to /api/todos with body: {}", request);
-        TodoResponse response = todoService.createToDo(request);
-        return ResponseEntity.ok(response);
+        TodoDto response = todoService.createToDo(request);
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
     @PutMapping("/todos/{id}")
-    public ResponseEntity<TodoResponse> updateTodo(@PathVariable Long id, @RequestBody TodoRequest request) {
+    public ResponseEntity<TodoDto> updateTodo(@PathVariable Long id, @RequestBody TodoDto request) {
         logger.info("PUT request to /api/todos/{} with body: {}", id, request);
-        TodoResponse response = todoService.updateToDo(id, request);
+        TodoDto response = todoService.updateToDo(id, request);
         return ResponseEntity.ok(response);
     }
 
