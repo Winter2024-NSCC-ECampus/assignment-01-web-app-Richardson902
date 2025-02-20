@@ -9,7 +9,7 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      "/todo/api/": {
+      "/api/": {
         target: "http://build-api:8080",
         changeOrigin: true,
         secure: false,

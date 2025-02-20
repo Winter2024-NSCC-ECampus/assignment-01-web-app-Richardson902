@@ -12,7 +12,7 @@ import lombok.*;
 public class Todo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
+    private Long id;
     private String title;
     private boolean isCompleted;
 }
