@@ -12,7 +12,7 @@ import org.todo.api.service.TodoService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/todos/")
 public class TodoController {
 
     private static final Logger logger = LoggerFactory.getLogger(TodoController.class);
@@ -20,35 +20,35 @@ public class TodoController {
     @Autowired
     private TodoService todoService;
 
-    @GetMapping("/todos/")
+    @GetMapping
     public ResponseEntity<List<TodoDto>> getAllTodos() {
         logger.info("GET request to /api/todos");
         List<TodoDto> response = todoService.getTodos();
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping("/todos/{id}")
+    @GetMapping("{id}")
     public ResponseEntity<TodoDto> getTodoById(@PathVariable Long id) {
         logger.info("GET request to /api/todos/{}", id);
         TodoDto response = todoService.getToDoById(id);
         return ResponseEntity.ok(response);
     }
 
-    @PostMapping("/todos/")
+    @PostMapping
     public ResponseEntity<TodoDto> addTodo(@RequestBody TodoDto request) {
         logger.info("POST request to /api/todos with body: {}", request);
         TodoDto response = todoService.createToDo(request);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
-    @PutMapping("/todos/{id}")
+    @PutMapping("{id}")
     public ResponseEntity<TodoDto> updateTodo(@PathVariable Long id, @RequestBody TodoDto request) {
         logger.info("PUT request to /api/todos/{} with body: {}", id, request);
         TodoDto response = todoService.updateToDo(id, request);
         return ResponseEntity.ok(response);
     }
 
-    @DeleteMapping("/todos/{id}")
+    @DeleteMapping("{id}")
     public ResponseEntity<Void> deleteTodo(@PathVariable Long id) {
         logger.info("DELETE request to /api/todos/{}", id);
         todoService.deleteToDoById(id);
