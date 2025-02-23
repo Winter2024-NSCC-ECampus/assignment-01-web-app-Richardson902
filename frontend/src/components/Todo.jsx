@@ -14,7 +14,7 @@ function Todo({ todo, onUpdate, onDelete }) {
       <label className="flex items-center space-x-3 flex-grow">
         <input
           type="checkbox"
-          checked={todo.isCompleted}
+          checked={todo.completed}
           onChange={handleCheckboxChange}
           className="appearance-none w-6 h-6 border-2 border-gray rounded-full checked:bg-orange-400 focus:ring-0 transition-all hover:cursor-pointer"
         />

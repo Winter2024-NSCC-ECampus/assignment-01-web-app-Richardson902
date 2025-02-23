@@ -31,7 +31,6 @@ function AddTodo({ onAddTodo }) {
         <button
           type="submit"
           className="px-6 py-3 text-white bg-[#76b7cd] rounded-r-full hover:bg-[#7ab0c4]"
-          disabled={!text.trim()}
         >
           Add
         </button>
