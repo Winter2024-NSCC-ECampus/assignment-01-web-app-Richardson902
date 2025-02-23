@@ -50,3 +50,5 @@ This is a Todo application built with Spring Boot backend, React frontend, and a
 - **Development Server**: Vite
 - **Containerization**: Docker, Docker Compose
 
+## Todo App Example
+![image](https://github.com/user-attachments/assets/010cdb3c-2a2f-4b95-aa09-e37c58e4a68e)
