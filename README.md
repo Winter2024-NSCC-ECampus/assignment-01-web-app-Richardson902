@@ -25,7 +25,7 @@ This is a Todo application built with Spring Boot backend, React frontend, and a
    cd assignment-01-web-app-Richardson902
    ```
 
-2. **Running the Application with Docker:
+2. **Running the Application with Docker**:
 
    The application is containerized with Docker. To run the full application (both frontend and backend), simply use the following command:
 
