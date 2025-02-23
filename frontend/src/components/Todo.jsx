@@ -10,17 +10,17 @@ function Todo({ todo, onUpdate, onDelete }) {
   };
 
   return (
-    <div className="flex items-center justify-between p-2 border-b border-gray-300">
-      <label className="flex items-center space-x-2">
+    <div className="flex items-center justify-between p-4 border-b border-[#d1cbc4]">
+      <label className="flex items-center space-x-3 flex-grow">
         <input
           type="checkbox"
           checked={todo.isCompleted}
           onChange={handleCheckboxChange}
-          className="form-checkbox"
+          className="appearance-none w-6 h-6 border-2 border-gray rounded-full checked:bg-orange-400 focus:ring-0 transition-all hover:cursor-pointer"
         />
         <span
-          className={`text-lg ${
-            todo.completed ? "line-through text-gray-500" : ""
+          className={`text-lg break-words ${
+            todo.completed ? "line-through text-gray-400" : "text-gray-900"
           }`}
         >
           {todo.title}
@@ -29,9 +29,9 @@ function Todo({ todo, onUpdate, onDelete }) {
 
       <button
         onClick={handleDeleteClick}
-        className="ml-4 px-3 py-1 text-white bg-red-500 hover:bg-red-600 rounded-md"
+        className="p-2 text-red-500 hover:text-red-700 hover:cursor-pointer"
       >
-        Delete
+        🗑
       </button>
     </div>
   );

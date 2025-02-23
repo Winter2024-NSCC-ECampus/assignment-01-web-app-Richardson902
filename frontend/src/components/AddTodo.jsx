@@ -19,20 +19,24 @@ function AddTodo({ onAddTodo }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex gap-2 mb-4">
-      <input
-        type="text"
-        value={text}
-        onChange={(e) => setText(e.target.value)}
-        placeholder="Add a new task..."
-        className="flex-1 p-2 border rounded-md focus-outline-none focus:ring-2-blue-500"
-      />
-      <button
-        type="submit"
-        className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 disabled:bg-gray-400"
-        disabled={!text.trim()}
-      />
-    </form>
+    <div className="max-w-xl mx-auto">
+      <form onSubmit={handleSubmit} className="flex mb-4">
+        <input
+          type="text"
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+          placeholder="What do you need to do?"
+          className="flex-1 p-3 text-gray-500 bg-[#f1ece6] rounded-l-full focus:outline-none"
+        />
+        <button
+          type="submit"
+          className="px-6 py-3 text-white bg-[#76b7cd] rounded-r-full hover:bg-[#7ab0c4]"
+          disabled={!text.trim()}
+        >
+          Add
+        </button>
+      </form>
+    </div>
   );
 }
 

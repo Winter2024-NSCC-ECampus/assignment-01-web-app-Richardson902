@@ -48,21 +48,23 @@ function TodoList() {
   };
 
   return (
-    <div className="todo-list">
+    <>
       <AddTodo onAddTodo={refreshTodos} />
-      {todos.length === 0 ? (
-        <p>No todos available</p>
-      ) : (
-        todos.map((todo) => (
-          <Todo
-            key={todo.id}
-            todo={todo}
-            onUpdate={handleUpdateTodo}
-            onDelete={handleDeleteTodo}
-          />
-        ))
-      )}
-    </div>
+      <div className="max-w-xl mx-auto bg-[#f1ece6] rounded-2xl p-4 shadow-md mt-8">
+        {todos.length === 0 ? (
+          <p className="text-[#dc892f] text-center">No todos available</p>
+        ) : (
+          todos.map((todo) => (
+            <Todo
+              key={todo.id}
+              todo={todo}
+              onUpdate={handleUpdateTodo}
+              onDelete={handleDeleteTodo}
+            />
+          ))
+        )}
+      </div>
+    </>
   );
 }
 
